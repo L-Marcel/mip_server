@@ -1,9 +1,10 @@
 import Knex from 'knex';
+import { enumToStringArray, ProductType } from '../../enums';
 
 export async function up(knex: Knex) {
  return await knex.schema.createTable('products', function (table) {
   table.integer('job').references('id').inTable('jobs');
-  table.enum('type', ["service", "item"]);
+  table.enum('type', enumToStringArray(ProductType));
   table.increments('id');
   table.string('name').notNullable();
   table.string('description');
