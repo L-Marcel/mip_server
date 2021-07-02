@@ -23,11 +23,22 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@types/mime-types": "^2.1.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "celebrate": "^14.0.0",
+    "connect": "^3.7.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "crypto": "^1.0.1",
+    "dev-classwork-linter": "^1.1.8",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "knex": "^0.21.1",
-    "pg": "^8.2.1",
-    "sqlite3": "^4.2.0"
+    "knex": "^0.95.6",
+    "log-symbols": "^5.0.0",
+    "mime-types": "^2.1.31",
+    "multer": "^1.4.2",
+    "pg": "^8.6.0",
+    "sqlite3": "^5.0.2"
   }
 }
