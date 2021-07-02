@@ -3,11 +3,11 @@ import { bd } from "../database/connection";
 
 export default class Users {
     /**
-   * Recebe um produto no corpo da requisição e salva
+   * Recebe um usuario no corpo da requisição e salva
    * ele no banco de dados
    * @param req - request (requisição)
    * @param res - response (resposta)
-   * @returns - o ID do produto criado
+   * @returns - o ID do usuario criado
    */
     static async create(req: Request, res: Response) {
         const user = req.body as User;
@@ -22,11 +22,11 @@ export default class Users {
     };
 
     /**
-     * Recebe um produto no corpo da requisição que contem um ID
-     * e atualiza o produto com o mesmo ID dentro do banco de dados
+     * Recebe um usuario no corpo da requisição que contem um ID
+     * e atualiza o usuario com o mesmo ID dentro do banco de dados
      * @param req - request (requisição)
      * @param res - response (resposta)
-     * @returns - o ID do produto atualizado
+     * @returns - o ID do usuario atualizado
      */
     static async update(req: Request, res: Response) {
         const user = req.body as User;
@@ -47,10 +47,10 @@ export default class Users {
 
     /**
      * Recebe um ID como query da requisição e deleta o 
-     * produto com o mesmo ID no banco de dados
+     * usuario com o mesmo ID no banco de dados
      * @param req - request (requisição)
      * @param res - response (resposta)
-     * @returns - o ID do produto deletado
+     * @returns - o ID do usuario deletado
      */
     static async delete(req: Request, res: Response) {
         const id = Number(req.query.id);
@@ -69,11 +69,11 @@ export default class Users {
     };
 
     /**
-     * Lista todos os produtos, pode receber um ID como query, nesse caso
-     * ele irá retornar apenas um produto.
+     * Lista todos os usuarios, pode receber um ID como query, nesse caso
+     * ele irá retornar apenas um usuario.
      * @param req - request (requisição)
      * @param res - response (resposta)
-     * @returns - o(s) produto(s)
+     * @returns - o(s) usuario(s)
      */
     static async list(req: Request, res: Response) {
         const id = Number(req.query.id);
