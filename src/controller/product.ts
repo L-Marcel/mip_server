@@ -2,13 +2,6 @@ import { Request, Response } from "express";
 import { bd } from "../database/connection";
 
 export default class Products {
-  /**
-   * Recebe um produto no corpo da requisição e salva
-   * ele no banco de dados
-   * @param req - request (requisição)
-   * @param res - response (resposta)
-   * @returns - o ID do produto criado
-   */
   static async create(req: Request, res: Response) {
     const product = req.body as Product;
 
@@ -21,13 +14,6 @@ export default class Products {
     });
   };
 
-  /**
-   * Recebe um produto no corpo da requisição que contem um ID
-   * e atualiza o produto com o mesmo ID dentro do banco de dados
-   * @param req - request (requisição)
-   * @param res - response (resposta)
-   * @returns - o ID do produto atualizado
-   */
   static async update(req: Request, res: Response) {
     const product = req.body as Product;
 
@@ -44,13 +30,6 @@ export default class Products {
     });
   };
 
-  /**
-   * Recebe um ID como query da requisição e deleta o 
-   * produto com o mesmo ID no banco de dados
-   * @param req - request (requisição)
-   * @param res - response (resposta)
-   * @returns - o ID do produto deletado
-   */
   static async delete(req: Request, res: Response) {
     const id = Number(req.query.id);
 
@@ -67,13 +46,6 @@ export default class Products {
     });
   };
 
-  /**
-   * Lista todos os produtos, pode receber um ID como query, nesse caso
-   * ele irá retornar apenas um produto.
-   * @param req - request (requisição)
-   * @param res - response (resposta)
-   * @returns - o(s) produto(s)
-   */
   static async list(req: Request, res: Response) {
     const id = Number(req.query.id);
 

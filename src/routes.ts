@@ -15,4 +15,6 @@ routes.post('/users/update', Users.update);
 routes.delete('/users/delete', Users.delete);
 routes.get('/users', Users.list);
 
+routes.post('/login', Users.login);
+
 export default routes;
