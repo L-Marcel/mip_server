@@ -3,18 +3,22 @@ import { bd } from "../database/connection";
 
 export default class Users {
     static async login(req: Request, res: Response){
-        const user = req.body as User;
+        const user = req.body as Credentials;
 
         if (user.email === undefined || user.password === undefined) {
             return res.status(400).json({ err: "Credenciais inválidas" });
         }
 
-        return await bd('users').select("id","name","email","phone")
-        .where(user.email, "email")
-        .andWhere(user.password, "password")
+        await bd('users').select("id","name","email","phone")
+        .where("email", user.email)
+        .andWhere("password", user.password)
         .first()
         .then((r) => {
-            return res.status(200).json(r);
+            if(r !== undefined){
+                return res.status(200).json(r);
+            }else{
+                return res.status(400).json({ err: "Credenciais inválidas" });
+            }
         }).catch((err) => {
             console.log(err);
             return res.status(400).json({ err: "Credenciais inválidas" });

@@ -7,6 +7,4 @@ if(process.env.NODE_ENV !== "production"){
  config = knexfile.development;
 }
 
-
-//Faz a conexão como banco de dados
 export const bd = Knex(config);

@@ -6,6 +6,11 @@ declare type User = {
  phone: string,
 }
 
+declare type Credentials = {
+  email: string,
+  password: string,
+} 
+
 declare type Product = Item | Service;
 
 declare type Item = {
