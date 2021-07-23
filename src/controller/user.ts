@@ -39,7 +39,7 @@ export default class Users {
 
     static async update(req: Request, res: Response) {
         const user = req.body as User;
-        console.log("Entrou no update");
+       
 
         if (user.id === undefined) {
             return res.status(400).json({ err: "Falta o ID" });
