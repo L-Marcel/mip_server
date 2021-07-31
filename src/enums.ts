@@ -24,3 +24,25 @@ export enum ProductType {
  "Item",
  "Serviço"
 };
+
+export enum MarkerIcon {
+ "white:utensils:Comida",
+ "red:book-reader:Aula",
+ "darkred:user-md:Saúde",
+ "lightred:dumbbell:Academia",
+ "orange:store:Loja",
+ "beige:palette:Design",
+ "green:seedling:Plantas",
+ "darkgreen:bread-slice:Padaria",
+ "lightgreen:dog:Animais",
+ "blue:glass-cheers:Eventos",
+ "darkblue:concierge-bell:Hospedagem",
+ "lightblue:birthday-cake:Doces",
+ "purple:air-freshener:Beleza",
+ "darkpurple:user-tie:Justiça",
+ "pink:screwdriver:Reparo",
+ "cadetblue:address-card:Outros",
+ "gray:hard-hat:Construção",
+ "lightgray:car-side:Transporte",
+ "black:terminal:Tecnologia",
+};

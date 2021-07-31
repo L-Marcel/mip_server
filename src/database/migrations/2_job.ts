@@ -1,4 +1,5 @@
 import Knex from 'knex';
+import { enumToStringArray, MarkerIcon } from '../../enums';
 
 export async function up(knex: Knex) {
  return await knex.schema.createTable('jobs', function (table) {
@@ -8,7 +9,7 @@ export async function up(knex: Knex) {
   table.string('description');
   table.double('x').notNullable();
   table.double('y').notNullable();
-  table.string('tag').notNullable();
+  table.enum('icon', enumToStringArray(MarkerIcon));
  });
 };
 
