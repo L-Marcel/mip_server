@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "rollback": "knex --knexfile knexfile.ts migrate:rollback",
-    "latest": "knex --knexfile knexfile.ts migrate:latest"
+    "latest": "knex --knexfile knexfile.ts migrate:latest",
+    "reset": "knex --knexfile knexfile.ts migrate:rollback && knex --knexfile knexfile.ts migrate:latest && ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "license": "MIT",
   "devDependencies": {
