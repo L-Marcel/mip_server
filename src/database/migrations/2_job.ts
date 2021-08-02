@@ -7,8 +7,8 @@ export async function up(knex: Knex) {
   table.string('name').notNullable();
   table.string('CNPJ');
   table.string('description');
-  table.double('x').notNullable();
-  table.double('y').notNullable();
+  table.double('lat').notNullable();
+  table.double('lng').notNullable();
   table.enum('icon', enumToStringArray(MarkerIcon));
  });
 };

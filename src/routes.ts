@@ -1,4 +1,5 @@
 import express from "express";
+import Jobs from "./controller/job";
 import Products from "./controller/product";
 import Users from "./controller/user";
 
@@ -9,6 +10,11 @@ routes.post('/products/create', Products.create);
 routes.post('/products/update', Products.update);
 routes.delete('/products/delete', Products.delete);
 routes.get('/products', Products.list);
+
+routes.post('/jobs/create', Jobs.create);
+routes.post('/jobs/update', Jobs.update);
+routes.delete('/jobs/delete', Jobs.delete);
+routes.get('/jobs', Jobs.list);
 
 routes.post('/users/create', Users.create);
 routes.post('/users/update', Users.update);

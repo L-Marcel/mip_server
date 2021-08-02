@@ -32,3 +32,13 @@ declare type Service = {
   description?: string,
   price: number,
 }
+
+declare type Job = {
+  id?: number,
+  name: string,
+  CNPJ?: string,
+  description?: string,
+  lat: number,
+  lng: number,
+  table: MakerIcon,
+}
