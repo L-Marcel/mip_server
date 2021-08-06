@@ -39,7 +39,7 @@ export enum MarkerIcon {
  "blue:hamburger:Comida",
  "purple:air-freshener:Beleza",
  "darkpurple:user-tie:Justiça",
- "cadetblue:screwdriver:Reparo",
+ "cadetblue:screwdriver:Reparo ou instalação",
  "cadetblue:address-card:Outros",
  "gray:hard-hat:Construção",
  "gray:car-side:Transporte",

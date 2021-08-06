@@ -48,8 +48,9 @@ export default class Products {
 
   static async list(req: Request, res: Response) {
     const id = Number(req.query.id);
+    const job = Number(req.query.job);
 
-    if (isNaN(id)) {
+    if (isNaN(id) && isNaN(job)) {
       return await bd('products').select("*").then((r) => {
         console.log("Produtos listados!!!");
         return res.status(200).json(r);
@@ -57,7 +58,26 @@ export default class Products {
         console.log(err);
         return res.status(400).json(err);
       });
-    }
+    } else if(isNaN(id) && !isNaN(job)) {
+      return await bd('products').select("*").where("job", job)
+      .first().then((r) => {
+        console.log("Produtos listados!!!");
+        return res.status(200).json(r);
+      }).catch((err) => {
+        console.log(err);
+        return res.status(400).json(err);
+      });
+    } else if(!isNaN(id) && !isNaN(job)) {
+      return await bd('products').select("*")
+      .where("job", job).andWhere("id", id)
+      .first().then((r) => {
+        console.log("Produtos listados!!!");
+        return res.status(200).json(r);
+      }).catch((err) => {
+        console.log(err);
+        return res.status(400).json(err);
+      });
+    };
 
     return await bd('products').select("*").where("id", id)
       .first().then((r) => {
