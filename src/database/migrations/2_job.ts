@@ -4,6 +4,7 @@ import { enumToStringArray, MarkerIcon } from '../../enums';
 export async function up(knex: Knex) {
  return await knex.schema.createTable('jobs', function (table) {
   table.increments('id');
+  table.integer('user').references('id').inTable('users');
   table.string('name').notNullable();
   table.string('CNPJ');
   table.string('description');
