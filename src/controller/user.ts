@@ -62,6 +62,7 @@ export default class Users {
         }
 
         return await bd('users').delete().where("id", id).then((r) => {
+            bd('user_jobs').delete().where("user", id);
             console.log("Usuário deletado!!!");
             return res.status(200).json(r);
         }).catch((err) => {
