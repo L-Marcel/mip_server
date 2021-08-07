@@ -62,7 +62,7 @@ export default class Products {
     } else if(isNaN(id) && !isNaN(job)) {
       return await bd('products').join("jobs", "products.job", "jobs.id")
       .select("products.*", "jobs.user").where("job", job)
-      .first().then((r) => {
+      .then((r) => {
         console.log("Produtos listados!!!");
         return res.status(200).json(r);
       }).catch((err) => {
@@ -85,7 +85,7 @@ export default class Products {
     return await bd('products').join("jobs", "products.job", "jobs.id")
       .select("products.*", "jobs.user")
       .where("id", id)
-      .first().then((r) => {
+      .then((r) => {
         console.log("Produto listado!!!");
         return res.status(200).json(r);
       }).catch((err) => {
