@@ -1,9 +1,41 @@
 import { Request, Response } from "express";
 import { bd } from "../database/connection";
+import validations from "../validations/config/messages";
+import ProductValidation from "../validations/product";
 
 export default class Products {
+  static async check(req: Request, res: Response) {
+    const job: Job = req.body;
+    let rt = req.params.rt;
+    rt = (rt === "create" || rt === "update") ? rt : "create";
+
+    ProductValidation.check(rt as "create" | "update")
+      .validateAsync(job, {
+        abortEarly: false,
+        messages: validations.config.messages,
+      }).then((res) => {
+        return res.status(200).send([]);
+      }).catch((err) => {
+        return res.status(200).send(err.details);
+      });
+  };
+
   static async create(req: Request, res: Response) {
     const product = req.body as Product;
+
+    let validation = await ProductValidation.check("create")
+    .validateAsync(product, {
+      abortEarly: false,
+      messages: validations.config.messages,
+    }).then((res) => {
+      return [res, true];
+    }).catch((err) => {
+      return [err, false];
+    });
+
+    if (!validation[1]) {
+      return res.status(400).send(validation[0].details);
+    };
 
     return await bd('products').insert(product).then((r) => {
       console.log("Produto criado!!!");
@@ -17,9 +49,19 @@ export default class Products {
   static async update(req: Request, res: Response) {
     const product = req.body as Product;
 
-    if (product.id === undefined) {
-      return res.status(400).json({ err: "Falta o ID" });
-    }
+    let validation = await ProductValidation.check("update")
+    .validateAsync(product, {
+      abortEarly: false,
+      messages: validations.config.messages,
+    }).then((res) => {
+      return [res, true];
+    }).catch((err) => {
+      return [err, false];
+    });
+
+    if (!validation[1]) {
+      return res.status(400).send(validation[0].details);
+    };
 
     return await bd('products').update(product).where("id", product.id).then((r) => {
       console.log("Produto atualizado!!!");

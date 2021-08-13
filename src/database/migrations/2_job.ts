@@ -1,4 +1,4 @@
-import Knex from 'knex';
+import { Knex } from 'knex';
 import { enumToStringArray, MarkerIcon } from '../../enums';
 
 export async function up(knex: Knex) {
