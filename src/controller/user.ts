@@ -1,37 +1,64 @@
 import { Request, Response } from "express";
 import { bd } from "../database/connection";
+import UserValidation from "../validations/user";
+import validations from "../validations/config/messages";
 
 export default class Users {
     static async check(req: Request, res: Response) {
         let user: User = req.body;
-        //...
+        let rt = req.params.rt;
+        rt = (rt === "create" || rt === "update") ? rt : "create";
+
+        UserValidation.check(rt as "create" | "update")
+            .validateAsync(user, {
+                abortEarly: false,
+                messages: validations.config.messages,
+            }).then((res) => {
+                return res.status(200).send([]);
+            }).catch((err) => {
+                return res.status(200).send(err.details);
+            });
+
     };
-    
-    static async login(req: Request, res: Response){
+
+    static async login(req: Request, res: Response) {
         const user = req.body as Credentials;
 
         if (user.email === undefined || user.password === undefined) {
             return res.status(400).json({ err: "Credenciais inválidas" });
         }
 
-        await bd('users').select("id","name","email","phone")
-        .where("email", user.email)
-        .andWhere("password", user.password)
-        .first()
-        .then((r) => {
-            if(r !== undefined){
-                return res.status(200).json(r);
-            }else{
+        await bd('users').select("id", "name", "email", "phone")
+            .where("email", user.email)
+            .andWhere("password", user.password)
+            .first()
+            .then((r) => {
+                if (r !== undefined) {
+                    return res.status(200).json(r);
+                } else {
+                    return res.status(400).json({ err: "Credenciais inválidas" });
+                }
+            }).catch((err) => {
+                console.log(err);
                 return res.status(400).json({ err: "Credenciais inválidas" });
-            }
-        }).catch((err) => {
-            console.log(err);
-            return res.status(400).json({ err: "Credenciais inválidas" });
-        });
+            });
     };
 
     static async create(req: Request, res: Response) {
         const user = req.body as User;
+        let validation = await UserValidation.check("create")
+            .validateAsync(user, {
+                abortEarly: false,
+                messages: validations.config.messages,
+            }).then((res) => {
+                return [res, true];
+            }).catch((err) => {
+                return [err, false];
+            });
+
+        if (!validation[1]) {
+            return res.status(400).send(validation[0].details);
+        };
 
         return await bd('users').insert(user).then((r) => {
             console.log("Usuário criado!!!");
@@ -44,7 +71,20 @@ export default class Users {
 
     static async update(req: Request, res: Response) {
         const user = req.body as User;
-       
+        let validation = await UserValidation.check("update")
+            .validateAsync(user, {
+                abortEarly: false,
+                messages: validations.config.messages,
+            }).then((res) => {
+                return [res, true];
+            }).catch((err) => {
+                return [err, false];
+            });
+
+        if (!validation[1]) {
+            return res.status(400).send(validation[0].details);
+        };
+
 
         if (user.id === undefined) {
             return res.status(400).json({ err: "Falta o ID" });
