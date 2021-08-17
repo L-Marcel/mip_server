@@ -21,6 +21,7 @@ routes.get('/jobs', Jobs.list);
 routes.post('/users/create', Users.create);
 routes.post('/users/update', Users.update);
 routes.delete('/users/delete', Users.delete);
+routes.post('/users/:rt/check', Users.check);
 routes.get('/users', Users.list);
 
 routes.post('/login', Users.login);
