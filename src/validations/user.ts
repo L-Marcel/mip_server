@@ -17,7 +17,13 @@ export default class UserValidation {
             }),
             name: Joi.string().required().min(4).max(30),
             email: Joi.string().required().min(10).max(50),
-            password: Joi.string().required().min(8),
+            password: Joi.string().min(8).custom((value, helper) => {
+                if (rt === "create" && value === undefined) {
+                    return helper.error("any.required");
+                } else {
+                    return value;
+                };
+            }),
             phone: Joi.string().required().min(10).max(14),
         });
     };

@@ -13,7 +13,8 @@ const validations = {
    "string.max": "{#label}|Deve ter no máximo {#limit} caractéres.",
    "string.email": "{#label}|Inválido.",
    "string.pattern.base": "{#label}|Inválido.",
-   "any.enum": "{#label}|Inválido."
+   "any.enum": "{#label}|Inválido.",
+   "any.invalid": "{#label}|Inválido."
   }
  }
 };

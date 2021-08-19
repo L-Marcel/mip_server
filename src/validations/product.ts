@@ -19,8 +19,8 @@ export default class ProductValidation {
    job: Joi.number().required().min(-1).integer(),
    name: Joi.string().required().min(4).max(20),
    description: Joi.string().allow("").allow(null).max(500),
-   delivery: Joi.boolean(),
-   unit: Joi.number().min(0).integer(),
+   delivery: Joi.boolean().allow(0, 1),
+   unit: Joi.number().min(1).integer(),
    price: Joi.number().min(0),
    type: Joi.custom((value, helper) => {
     let arr = enumToStringArray(ProductType);

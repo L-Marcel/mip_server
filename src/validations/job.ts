@@ -1,6 +1,7 @@
 
 import Joi from 'joi';
 import { bd } from '../database/connection';
+import { cnpj} from 'cpf-cnpj-validator'; 
 import { enumToStringArray, MarkerIcon } from '../enums';
 
 export default class JobValidation {
@@ -36,7 +37,9 @@ export default class JobValidation {
    lng: Joi.number().required(),
    description: Joi.string().allow("").allow(null).max(500),
    CNPJ: Joi.string().allow("").custom((value, helper) => {
-    if (cnpjInUse) {
+    if(!cnpj.isValid(value)) {
+     return helper.error("any.invalid");
+    } else if (cnpjInUse) {
      return helper.error("any.unique");
     } else {
      return value;

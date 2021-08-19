@@ -85,11 +85,6 @@ export default class Users {
             return res.status(400).send(validation[0].details);
         };
 
-
-        if (user.id === undefined) {
-            return res.status(400).json({ err: "Falta o ID" });
-        }
-
         return await bd('users').update(user).where("id", user.id).then((r) => {
             console.log("Usuário atualizado!!!");
             return res.status(200).json(r);

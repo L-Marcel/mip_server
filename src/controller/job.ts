@@ -52,7 +52,7 @@ export default class Jobs {
     const job = req.body as Job;
 
     let valuesInUse = await JobValidation.valuesInUse(job, job.id);
-    let validation = await JobValidation.check(valuesInUse.cnpjInUse, "create")
+    let validation = await JobValidation.check(valuesInUse.cnpjInUse, "update")
       .validateAsync(job, {
         abortEarly: false,
         messages: validations.config.messages,
