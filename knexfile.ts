@@ -39,23 +39,6 @@ module.exports = {
     useNullAsDefault: true,
   },
 
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 0,
-      max: 100,
-      propagateCreateError: false
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
   production: {
     client: 'postgresql',
     connection: {

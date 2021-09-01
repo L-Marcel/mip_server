@@ -60,7 +60,7 @@ export default class Users {
             return res.status(400).send(validation[0].details);
         };
 
-        return await bd('users').insert(user).then((r) => {
+        return await bd('users').insert(user).returning("id").then((r) => {
             console.log("Usuário criado!!!");
             return res.status(200).json(r);
         }).catch((err) => {
@@ -85,7 +85,7 @@ export default class Users {
             return res.status(400).send(validation[0].details);
         };
 
-        return await bd('users').update(user).where("id", user.id).then((r) => {
+        return await bd('users').update(user).where("id", user.id).returning("id").then((r) => {
             console.log("Usuário atualizado!!!");
             return res.status(200).json(r);
         }).catch((err) => {
@@ -101,8 +101,7 @@ export default class Users {
             return res.status(400).json({ err: "Falta o ID" });
         }
 
-        return await bd('users').delete().where("id", id).then((r) => {
-            bd('user_users').delete().where("user", id);
+        return await bd('users').delete().where("id", id).returning("id").then((r) => {
             console.log("Usuário deletado!!!");
             return res.status(200).json(r);
         }).catch((err) => {

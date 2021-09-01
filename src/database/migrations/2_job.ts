@@ -1,8 +1,7 @@
-import { Knex } from 'knex';
 import { enumToStringArray, MarkerIcon } from '../../enums';
 
-export async function up(knex: Knex) {
- return await knex.schema.createTable('jobs', function (table) {
+export async function up(knex: any) {
+ return await knex.schema.createTable('jobs', function (table: any) {
   table.increments('id');
   table.integer('user').references('id').inTable('users');
   table.string('name').notNullable();
@@ -14,6 +13,6 @@ export async function up(knex: Knex) {
  });
 };
 
-export async function down(knex: Knex) {
+export async function down(knex: any) {
  return await knex.schema.dropTable('jobs');
 };

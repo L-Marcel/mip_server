@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
+    "heroku-postbuild": "npm run build",
+    "build": "tsc",
+    "production": "knex --knexfile build/knexfile.js migrate:latest && node build/src/server.js -p $PORT --trace-warnings",
     "start": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "rollback": "knex --knexfile knexfile.ts migrate:rollback",
     "latest": "knex --knexfile knexfile.ts migrate:latest",

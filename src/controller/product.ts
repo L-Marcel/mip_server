@@ -37,7 +37,7 @@ export default class Products {
       return res.status(400).send(validation[0].details);
     };
 
-    return await bd('products').insert(product).then((r) => {
+    return await bd('products').insert(product).returning("id").then((r) => {
       console.log("Produto criado!!!");
       return res.status(200).json(r);
     }).catch((err) => {
@@ -63,7 +63,7 @@ export default class Products {
       return res.status(400).send(validation[0].details);
     };
 
-    return await bd('products').update(product).where("id", product.id).then((r) => {
+    return await bd('products').update(product).where("id", product.id).returning("id").then((r) => {
       console.log("Produto atualizado!!!");
       return res.status(200).json(r);
     }).catch((err) => {
@@ -79,7 +79,7 @@ export default class Products {
       return res.status(400).json({ err: "Falta o ID" });
     }
 
-    return await bd('products').delete().where("id", id).then((r) => {
+    return await bd('products').delete().where("id", id).returning("id").then((r) => {
       console.log("Produto deletado!!!");
       return res.status(200).json(r);
     }).catch((err) => {
