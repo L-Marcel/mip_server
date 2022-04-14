@@ -1,4 +1,5 @@
 {
+  "translatedDescriptions": "Aplicação feita em Node.js desenvolvida em dupla com Maria Clara Fernandes durante a matéria de Programação para Intenet (PPI). Se trata de um servidor Back-End feito para registrar pontos de serviços autonomos em Macau.",
   "technologies": [
     "Node.js"
   ]
